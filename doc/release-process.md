@@ -90,25 +90,25 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
 	./bin/gbuild --commit helium=v${VERSION} ../helium/contrib/gitian-descriptors/gitian-linux.yml
 	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../helium/contrib/gitian-descriptors/gitian-linux.yml
-	mv build/out/helium-*.tar.gz build/out/src/helium-*.tar.gz ../
+	mv build/out/heliumcore-*.tar.gz build/out/src/heliumcore-*.tar.gz ../
 
 	./bin/gbuild --commit helium=v${VERSION} ../helium/contrib/gitian-descriptors/gitian-win.yml
 	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../helium/contrib/gitian-descriptors/gitian-win.yml
-	mv build/out/helium-*-win-unsigned.tar.gz inputs/helium-win-unsigned.tar.gz
-	mv build/out/helium-*.zip build/out/helium-*.exe ../
+	mv build/out/heliumcore-*-win-unsigned.tar.gz inputs/heliumcore-win-unsigned.tar.gz
+	mv build/out/heliumcore-*.zip build/out/heliumcore-*.exe ../
 
 	./bin/gbuild --commit helium=v${VERSION} ../helium/contrib/gitian-descriptors/gitian-osx.yml
 	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../helium/contrib/gitian-descriptors/gitian-osx.yml
-	mv build/out/helium-*-osx-unsigned.tar.gz inputs/helium-osx-unsigned.tar.gz
-	mv build/out/helium-*.tar.gz build/out/helium-*.dmg ../
+	mv build/out/heliumcore-*-osx-unsigned.tar.gz inputs/heliumcore-osx-unsigned.tar.gz
+	mv build/out/heliumcore-*.tar.gz build/out/heliumcore-*.dmg ../
 	popd
 
   Build output expected:
 
-  1. source tarball (helium-${VERSION}.tar.gz)
-  2. linux 32-bit and 64-bit dist tarballs (helium-${VERSION}-linux[32|64].tar.gz)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (helium-${VERSION}-win[32|64]-setup-unsigned.exe, helium-${VERSION}-win[32|64].zip)
-  4. OS X unsigned installer and dist tarball (helium-${VERSION}-osx-unsigned.dmg, helium-${VERSION}-osx64.tar.gz)
+  1. source tarball (heliumcore-${VERSION}.tar.gz)
+  2. linux 32-bit and 64-bit dist tarballs (heliumcore-${VERSION}-linux[32|64].tar.gz)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (heliumcore-${VERSION}-win[32|64]-setup-unsigned.exe, heliumcore-${VERSION}-win[32|64].zip)
+  4. OS X unsigned installer and dist tarball (heliumcore-${VERSION}-osx-unsigned.dmg, heliumcore-${VERSION}-osx64.tar.gz)
   5. Gitian signatures (in gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/
 
 ###Verify other gitian builders signatures to your own. (Optional)
@@ -147,7 +147,7 @@ Commit your signature to gitian.sigs:
 	./bin/gbuild -i --commit signature=v${VERSION} ../helium/contrib/gitian-descriptors/gitian-osx-signer.yml
 	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../helium/contrib/gitian-descriptors/gitian-osx-signer.yml
 	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../helium/contrib/gitian-descriptors/gitian-osx-signer.yml
-	mv build/out/helium-osx-signed.dmg ../helium-${VERSION}-osx.dmg
+	mv build/out/heliumcore-osx-signed.dmg ../heliumcore-${VERSION}-osx.dmg
 	popd
 
   Create (and optionally verify) the signed Windows binaries:
@@ -156,8 +156,8 @@ Commit your signature to gitian.sigs:
 	./bin/gbuild -i --commit signature=v${VERSION} ../helium/contrib/gitian-descriptors/gitian-win-signer.yml
 	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../helium/contrib/gitian-descriptors/gitian-win-signer.yml
 	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../helium/contrib/gitian-descriptors/gitian-win-signer.yml
-	mv build/out/helium-*win64-setup.exe ../helium-${VERSION}-win64-setup.exe
-	mv build/out/helium-*win32-setup.exe ../helium-${VERSION}-win32-setup.exe
+	mv build/out/heliumcore-*win64-setup.exe ../heliumcore-${VERSION}-win64-setup.exe
+	mv build/out/heliumcore-*win32-setup.exe ../heliumcore-${VERSION}-win32-setup.exe
 	popd
 
 Commit your signature for the signed OS X/Windows binaries:
